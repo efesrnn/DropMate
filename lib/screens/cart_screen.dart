@@ -1,6 +1,6 @@
-// Sepet ekrani.
-// AnimatedBuilder ile CartController degisikliklerini dinler ve ListView.builder
-// kullanarak sepetteki urunleri listeler.
+// Sepet ekranı.
+// AnimatedBuilder ile CartController değişikliklerini dinler ve ListView.builder
+// kullanarak sepetteki ürünleri listeler.
 
 import 'package:flutter/material.dart';
 import '../models/cart_controller.dart';
@@ -30,7 +30,7 @@ class CartScreen extends StatelessWidget {
                       size: 64, color: AppColors.textSecondary),
                   SizedBox(height: 12),
                   Text(
-                    'Sepetin bos',
+                    'Sepetin boş',
                     style: TextStyle(
                       color: AppColors.textSecondary,
                       fontSize: 16,
@@ -151,10 +151,10 @@ class CartScreen extends StatelessWidget {
                           cart.clear();
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                                content: Text('Siparis olusturuldu!')),
+                                content: Text('Sipariş oluşturuldu!')),
                           );
                         },
-                        child: const Text('Siparisi Tamamla'),
+                        child: const Text('Siparişi Tamamla'),
                       ),
                     ),
                   ],

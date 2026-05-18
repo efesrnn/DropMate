@@ -1,5 +1,5 @@
-// Teslimat secenegi karti (Araba / Bisiklet / Yuruyus).
-// BRAND_IDENTITY 8. tablosundaki min-max komisyon araliklarini gosterir.
+// Teslimat seçeneği kartı (Araba / Bisiklet / Yürüyüş).
+// BRAND_IDENTITY 8. tablosundaki min-max komisyon aralıklarını gösterir.
 
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
@@ -20,7 +20,7 @@ class DeliveryOption {
   });
 }
 
-// BRAND_IDENTITY ile birebir komisyon araliklari.
+// BRAND_IDENTITY ile birebir komisyon aralıkları.
 const List<DeliveryOption> kDeliveryOptions = <DeliveryOption>[
   DeliveryOption(
     label: 'Araba',
@@ -37,7 +37,7 @@ const List<DeliveryOption> kDeliveryOptions = <DeliveryOption>[
     maxCommission: 75,
   ),
   DeliveryOption(
-    label: 'Yuruyus',
+    label: 'Yürüyüş',
     icon: Icons.directions_walk_outlined,
     duration: '35-60 dk',
     minCommission: 15,

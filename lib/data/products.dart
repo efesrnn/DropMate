@@ -1,62 +1,65 @@
-// Statik urun verisi.
-// 7 kategori (Market, Yemek, Ilac, Cicek & Hediye, Kirtasiye, Teknoloji,
-// Su & Icecek) uzerinden ~18 urun tanimlar.
-// Gercek bir backend yerine bu sabit liste kullanilir.
+// Statik ürün verisi.
+// 7 kategori (Market, Yemek, İlaç, Çiçek & Hediye, Kırtasiye, Teknoloji,
+// Su & İçecek) üzerinden ~18 ürün tanımlar.
+// Gerçek bir backend yerine bu sabit liste kullanılır.
 
 import '../models/product.dart';
 
 // 7 sabit kategori - BRAND_IDENTITY.md ile birebir uyumlu.
 const List<String> kCategories = <String>[
-  'Tumu',
+  'Tümü',
   'Market',
   'Yemek',
-  'Ilac',
-  'Cicek & Hediye',
-  'Kirtasiye',
+  'İlaç',
+  'Çiçek & Hediye',
+  'Kırtasiye',
   'Teknoloji',
-  'Su & Icecek',
+  'Su & İçecek',
 ];
 
-// Picsum tohum URL'si - ag bagli olmasa bile fallback ile sorunsuz calisir.
-String _img(int seed) => 'https://picsum.photos/seed/dropmate$seed/400/400';
+// Unsplash üzerinden ürüne özel sabit görsel.
+// Her foto ID ürün ile semantik olarak eşleşir; çevrimdışı
+// durumda ProductCard'ın errorBuilder'ı kategoriye uygun ikon gösterir.
+String _img(String photoId) =>
+    'https://images.unsplash.com/$photoId?auto=format&fit=crop&w=400&h=400&q=80';
 
 // Ham JSON listesi - Product.fromJson ile parse edilir.
 final List<Map<String, dynamic>> productJson = <Map<String, dynamic>>[
   {
     'id': 1,
-    'name': 'Tam Bugday Ekmek',
+    'name': 'Tam Buğday Ekmek',
     'category': 'Market',
     'price': 24.90,
     'description':
-        'Gunluk taze, %100 tam bugday unundan; lifli ve doyurucu. 500 gr ambalaj.',
-    'imageUrl': _img(1),
+        'Günlük taze, %100 tam buğday unundan; lifli ve doyurucu. 500 gr ambalaj.',
+    'imageUrl': _img('photo-1509440159596-0249088772ff'),
   },
   {
     'id': 2,
-    'name': 'Organik Sut 1L',
+    'name': 'Organik Süt 1L',
     'category': 'Market',
     'price': 32.50,
     'description':
-        'Cumranli ciftliklerden gunluk organik inek sutu. Soguk zincir korumali.',
-    'imageUrl': _img(2),
+        'Çumralı çiftliklerden günlük organik inek sütü. Soğuk zincir korumalı.',
+    'imageUrl': _img('photo-1550583724-b2692b85b150'),
   },
   {
     'id': 3,
-    'name': 'Kahvalti Yumurtasi 15li',
+    'name': 'Kahvaltı Yumurtası 15li',
     'category': 'Market',
     'price': 89.90,
     'description':
-        'Serbest gezen tavuk yumurtasi, kahvalti boyu, 15li koli.',
-    'imageUrl': _img(3),
+        'Serbest gezen tavuk yumurtası, kahvaltı boyu, 15li koli.',
+    'imageUrl': _img('photo-1518569656558-1f25e69d93d7'),
   },
   {
     'id': 4,
-    'name': 'Cheeseburger Menu',
+    'name': 'Cheeseburger Menü',
     'category': 'Yemek',
     'price': 189.00,
     'description':
-        '180 gr dana kofte, cedar peynir, patates ve icecek. Sicak teslimat.',
-    'imageUrl': _img(4),
+        '180 gr dana köfte, cheddar peynir, patates ve içecek. Sıcak teslimat.',
+    'imageUrl': _img('photo-1568901346375-23c9450c58cd'),
   },
   {
     'id': 5,
@@ -64,8 +67,8 @@ final List<Map<String, dynamic>> productJson = <Map<String, dynamic>>[
     'category': 'Yemek',
     'price': 215.00,
     'description':
-        'Ev yapimi hamur, dogal domates sos ve mozzarella. 30 cm.',
-    'imageUrl': _img(5),
+        'Ev yapımı hamur, doğal domates sos ve mozzarella. 30 cm.',
+    'imageUrl': _img('photo-1604068549290-dea0e4a305ca'),
   },
   {
     'id': 6,
@@ -73,80 +76,80 @@ final List<Map<String, dynamic>> productJson = <Map<String, dynamic>>[
     'category': 'Yemek',
     'price': 145.00,
     'description':
-        'Izgara tavuk gogsu, marul, parmesan, kruton ve sezar sos.',
-    'imageUrl': _img(6),
+        'Izgara tavuk göğsü, marul, parmesan, kruton ve sezar sos.',
+    'imageUrl': _img('photo-1551248429-40975aa4de74'),
   },
   {
     'id': 7,
     'name': 'Parol 500 mg 20 Tablet',
-    'category': 'Ilac',
+    'category': 'İlaç',
     'price': 38.75,
     'description':
-        'Hafif/orta agri ve ates dusurucu. Recetesiz satilabilir.',
-    'imageUrl': _img(7),
+        'Hafif/orta ağrı ve ateş düşürücü. Reçetesiz satılabilir.',
+    'imageUrl': _img('photo-1584308666744-24d5c474f2ae'),
   },
   {
     'id': 8,
     'name': 'C Vitamini 1000 mg',
-    'category': 'Ilac',
+    'category': 'İlaç',
     'price': 129.00,
     'description':
-        'Efervesan tablet, 20 adet. Bagisiklik destegi icin.',
-    'imageUrl': _img(8),
+        'Efervesan tablet, 20 adet. Bağışıklık desteği için.',
+    'imageUrl': _img('photo-1626716493137-b67fe9501e76'),
   },
   {
     'id': 9,
-    'name': 'Kirmizi Gul Buketi',
-    'category': 'Cicek & Hediye',
+    'name': 'Kırmızı Gül Buketi',
+    'category': 'Çiçek & Hediye',
     'price': 459.00,
     'description':
-        '11 dal taze kirmizi gul, hediye ambalajli. Ayni gun teslimat.',
-    'imageUrl': _img(9),
+        '11 dal taze kırmızı gül, hediye ambalajlı. Aynı gün teslimat.',
+    'imageUrl': _img('photo-1561181286-d3fee7d55364'),
   },
   {
     'id': 10,
-    'name': 'Premium Cikolata Kutu',
-    'category': 'Cicek & Hediye',
+    'name': 'Premium Çikolata Kutusu',
+    'category': 'Çiçek & Hediye',
     'price': 299.00,
     'description':
-        '24li karisik bitter ve sutlu cikolata. Hediye paketi dahil.',
-    'imageUrl': _img(10),
+        '24lü karışık bitter ve sütlü çikolata. Hediye paketi dahil.',
+    'imageUrl': _img('photo-1549007994-cb92caebd54b'),
   },
   {
     'id': 11,
     'name': 'A4 Defter 80 Yaprak',
-    'category': 'Kirtasiye',
+    'category': 'Kırtasiye',
     'price': 64.90,
     'description':
-        'Spiralli, cizgili, kapakli defter. Lise/universite icin uygun.',
-    'imageUrl': _img(11),
+        'Spiralli, çizgili, kapaklı defter. Lise/üniversite için uygun.',
+    'imageUrl': _img('photo-1531346878377-a5be20888e57'),
   },
   {
     'id': 12,
     'name': 'Jel Kalem Seti 8li',
-    'category': 'Kirtasiye',
+    'category': 'Kırtasiye',
     'price': 79.50,
     'description':
-        '0.7 mm jel kalem, 8 renk, akici yazim.',
-    'imageUrl': _img(12),
+        '0.7 mm jel kalem, 8 renk, akıcı yazım.',
+    'imageUrl': _img('photo-1568871391175-e29ee4406bbe'),
   },
   {
     'id': 13,
-    'name': 'USB-C Sarj Kablosu 1m',
+    'name': 'USB-C Şarj Kablosu 1m',
     'category': 'Teknoloji',
     'price': 99.00,
     'description':
-        '3A hizli sarj destekli orgu kapli USB-C kablo.',
-    'imageUrl': _img(13),
+        '3A hızlı şarj destekli örgü kaplı USB-C kablo.',
+    'imageUrl': _img('photo-1583394838336-acd977736f90'),
   },
   {
     'id': 14,
-    'name': 'Kablosuz Kulaklik',
+    'name': 'Kablosuz Kulaklık',
     'category': 'Teknoloji',
     'price': 749.00,
     'description':
-        'Bluetooth 5.3, 30 saate kadar pil, gurultu izolasyonu.',
-    'imageUrl': _img(14),
+        'Bluetooth 5.3, 30 saate kadar pil, gürültü izolasyonu.',
+    'imageUrl': _img('photo-1505740420928-5e560c06d30e'),
   },
   {
     'id': 15,
@@ -154,39 +157,39 @@ final List<Map<String, dynamic>> productJson = <Map<String, dynamic>>[
     'category': 'Teknoloji',
     'price': 549.00,
     'description':
-        'Hizli sarj cikisli tasinabilir batarya, USB-C giris.',
-    'imageUrl': _img(15),
+        'Hızlı şarj çıkışlı taşınabilir batarya, USB-C giriş.',
+    'imageUrl': _img('photo-1609091839311-d5365f9ff1c5'),
   },
   {
     'id': 16,
-    'name': 'Dogal Kaynak Suyu 5L',
-    'category': 'Su & Icecek',
+    'name': 'Doğal Kaynak Suyu 5L',
+    'category': 'Su & İçecek',
     'price': 29.00,
     'description':
-        'Saman ambalaj, dogal kaynak suyu, 5 litre.',
-    'imageUrl': _img(16),
+        'Cam şişe ambalaj, doğal kaynak suyu, 5 litre.',
+    'imageUrl': _img('photo-1548839140-29a749e1cf4d'),
   },
   {
     'id': 17,
-    'name': 'Taze Sikma Portakal Suyu',
-    'category': 'Su & Icecek',
+    'name': 'Taze Sıkma Portakal Suyu',
+    'category': 'Su & İçecek',
     'price': 69.00,
     'description':
-        '500 ml taze sikilmis portakal suyu, sekersiz.',
-    'imageUrl': _img(17),
+        '500 ml taze sıkılmış portakal suyu, şekersiz.',
+    'imageUrl': _img('photo-1600271886742-f049b9b40ce6'),
   },
   {
     'id': 18,
-    'name': 'Soguk Demleme Kahve',
-    'category': 'Su & Icecek',
+    'name': 'Soğuk Demleme Kahve',
+    'category': 'Su & İçecek',
     'price': 95.00,
     'description':
-        '12 saat soguk demleme, 330 ml sise, %100 arabica.',
-    'imageUrl': _img(18),
+        '12 saat soğuk demleme, 330 ml şişe, %100 arabica.',
+    'imageUrl': _img('photo-1461023058943-07fcbe16d735'),
   },
 ];
 
-// JSON listesini Product objelerine cevirir.
+// JSON listesini Product objelerine çevirir.
 List<Product> loadProducts() {
   return productJson.map((j) => Product.fromJson(j)).toList(growable: false);
 }

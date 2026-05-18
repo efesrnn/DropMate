@@ -1,6 +1,6 @@
-// Karsilama / Splash ekrani.
-// DropMate logosu, tagline ve "Devam Et" butonu icerir.
-// Stateless bir widget olarak tasarlanmistir; durum tasimaz.
+// Karşılama / Splash ekranı.
+// DropMate logosu, tagline ve "Devam Et" butonu içerir.
+// Stateless bir widget olarak tasarlanmıştır; durum tutmaz.
 
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
@@ -31,7 +31,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                'Herhangi bir marketten herhangi bir ürün — '
+                'Herhangi bir marketten herhangi bir ürün - '
                 'yakındaki komşun dakikalar içinde getirsin.',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -43,7 +43,7 @@ class WelcomeScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // MaterialPageRoute ile push - Navigator.push kullanimi
+                    // MaterialPageRoute ile push - Navigator.push kullanımı
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute<void>(
                         builder: (_) => const ProductListScreen(),

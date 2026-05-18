@@ -1,6 +1,7 @@
-// Tek bir urunun kart gosterimi.
-// GridView icinde kullanilir. Image.network + errorBuilder ile
-// offline calismayi destekler.
+// Tek bir ürünün kart gösterimi.
+// GridView içinde kullanılır. Image.network + errorBuilder ile
+// offline çalışmayı destekler. Layout Expanded + mainAxisSize.min ile
+// katı hücre yüksekliğinde overflow olmadan çalışır.
 
 import 'package:flutter/material.dart';
 import '../models/product.dart';
@@ -21,10 +22,10 @@ class ProductCard extends StatelessWidget {
     return Material(
       color: AppColors.surface,
       borderRadius: BorderRadius.circular(16),
+      clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(16),
-        child: Container(
+        child: Ink(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: AppColors.border),
@@ -32,47 +33,50 @@ class ProductCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Urun gorseli - Image.network + errorBuilder (yonergeye uygun)
-              AspectRatio(
-                aspectRatio: 1,
+              // Ürün görseli - kalan dikey alanı kaplar, overflow olmaz.
+              Expanded(
                 child: ClipRRect(
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(16),
                   ),
-                  child: Image.network(
-                    product.imageUrl,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stack) =>
-                        _ImagePlaceholder(category: product.category),
-                    loadingBuilder: (context, child, progress) {
-                      if (progress == null) return child;
-                      return const ColoredBox(
-                        color: AppColors.background,
-                        child: Center(
-                          child: SizedBox(
-                            width: 24,
-                            height: 24,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              color: AppColors.primary,
+                  child: SizedBox.expand(
+                    child: Image.network(
+                      product.imageUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stack) =>
+                          _ImagePlaceholder(category: product.category),
+                      loadingBuilder: (context, child, progress) {
+                        if (progress == null) return child;
+                        return const ColoredBox(
+                          color: AppColors.background,
+                          child: Center(
+                            child: SizedBox(
+                              width: 24,
+                              height: 24,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: AppColors.primary,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
+              // Metin alanı - sabit yüksekliği yok, içerik kadar kaplar.
               Padding(
-                padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
+                padding: const EdgeInsets.fromLTRB(10, 8, 10, 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     // Kategori rozeti
                     Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 8,
-                        vertical: 4,
+                        vertical: 3,
                       ),
                       decoration: BoxDecoration(
                         color: AppColors.primary.withOpacity(0.10),
@@ -80,31 +84,35 @@ class ProductCard extends StatelessWidget {
                       ),
                       child: Text(
                         product.category,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
+                          fontSize: 10.5,
+                          fontWeight: FontWeight.w700,
                           color: AppColors.primaryDark,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 6),
                     Text(
                       product.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 13,
                         fontWeight: FontWeight.w600,
                         color: AppColors.textPrimary,
-                        height: 1.3,
+                        height: 1.25,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 4),
                     Text(
                       product.formattedPrice,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w800,
                         color: AppColors.primary,
                       ),
                     ),
@@ -129,15 +137,15 @@ class _ImagePlaceholder extends StatelessWidget {
         return Icons.local_grocery_store_outlined;
       case 'Yemek':
         return Icons.restaurant_outlined;
-      case 'Ilac':
+      case 'İlaç':
         return Icons.medication_outlined;
-      case 'Cicek & Hediye':
+      case 'Çiçek & Hediye':
         return Icons.local_florist_outlined;
-      case 'Kirtasiye':
+      case 'Kırtasiye':
         return Icons.edit_note_outlined;
       case 'Teknoloji':
         return Icons.devices_other_outlined;
-      case 'Su & Icecek':
+      case 'Su & İçecek':
         return Icons.local_drink_outlined;
       default:
         return Icons.shopping_bag_outlined;

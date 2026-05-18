@@ -1,6 +1,6 @@
-// Urun detay ekrani.
-// Product nesnesini Route Arguments uzerinden alir.
-// Sepete Ekle butonu CartController state'ini gunceller (durum simulasyonu).
+// Ürün detay ekranı.
+// Product nesnesini Route Arguments üzerinden alır.
+// Sepete Ekle butonu CartController state'ini günceller (durum simülasyonu).
 
 import 'package:flutter/material.dart';
 import '../models/cart_controller.dart';
@@ -20,7 +20,7 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  int _selectedDeliveryIndex = 1; // varsayilan: Bisiklet
+  int _selectedDeliveryIndex = 1; // varsayılan: Bisiklet
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text('Urun Detayi'),
+        title: const Text('Ürün Detayı'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 120),
@@ -92,7 +92,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
             const SizedBox(height: 20),
             Text(
-              'Aciklama',
+              'Açıklama',
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 8),
@@ -104,7 +104,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
             const SizedBox(height: 24),
             Text(
-              'Teslimat Secenegi',
+              'Teslimat Seçeneği',
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 12),
@@ -127,7 +127,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               }),
             ),
             const SizedBox(height: 16),
-            // Tahmini teslimat - secime gore guncellenir.
+            // Tahmini teslimat - seçime göre güncellenir.
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
@@ -193,7 +193,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 
   void _addToCart(BuildContext context, Product product) {
-    // CartController durumu guncelle - state simulasyonu.
+    // CartController durumunu güncelle - state simülasyonu.
     CartController.instance.add(product);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

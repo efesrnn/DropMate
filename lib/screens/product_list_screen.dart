@@ -1,5 +1,5 @@
-// Ana ekran: arama + kategori filtresi + urun gridi.
-// AppBar sepet ikonu rozet ile (CartController) bagli.
+// Ana ekran: arama + kategori filtresi + ürün gridi.
+// AppBar sepet ikonu rozet ile (CartController) bağlı.
 
 import 'package:flutter/material.dart';
 import '../data/products.dart';
@@ -23,7 +23,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   late final List<Product> _allProducts;
   final TextEditingController _searchController = TextEditingController();
   String _query = '';
-  String _selectedCategory = 'Tumu';
+  String _selectedCategory = 'Tümü';
 
   @override
   void initState() {
@@ -41,7 +41,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
     final q = _query.trim().toLowerCase();
     return _allProducts.where((p) {
       final matchesCategory =
-          _selectedCategory == 'Tumu' || p.category == _selectedCategory;
+          _selectedCategory == 'Tümü' || p.category == _selectedCategory;
       final matchesQuery = q.isEmpty ||
           p.name.toLowerCase().contains(q) ||
           p.description.toLowerCase().contains(q);
@@ -58,7 +58,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   }
 
   void _openCart() {
-    // MaterialPageRoute ile push - yonergeye uygun ikinci kullanim.
+    // MaterialPageRoute ile push - yönergeye uygun ikinci kullanım.
     Navigator.of(context).push(
       MaterialPageRoute<void>(builder: (_) => const CartScreen()),
     );
@@ -140,8 +140,8 @@ class _EmptyState extends StatelessWidget {
             const SizedBox(height: 12),
             Text(
               query.isEmpty
-                  ? 'Bu kategoride urun bulunamadi'
-                  : '"$query" icin sonuc yok',
+                  ? 'Bu kategoride ürün bulunamadı'
+                  : '"$query" için sonuç yok',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: AppColors.textSecondary,

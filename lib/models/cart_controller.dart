@@ -1,20 +1,20 @@
-// Sepet durumu - basit ChangeNotifier (material/foundation icinde gelir).
-// Harici bir state-management paketi kullanilmaz; yonergeye uygun.
+// Sepet durumu - basit ChangeNotifier (material/foundation içinde gelir).
+// Harici bir state-management paketi kullanılmaz; yönergeye uygun.
 
 import 'package:flutter/foundation.dart';
 import 'product.dart';
 
 class CartController extends ChangeNotifier {
-  // Singleton - tum ekranlar ayni sepete erisir.
+  // Singleton - tüm ekranlar aynı sepete erişir.
   CartController._internal();
   static final CartController instance = CartController._internal();
 
   final List<Product> _items = <Product>[];
 
-  // Sepetteki urun listesi (degistirilemez).
+  // Sepetteki ürün listesi (değiştirilemez).
   List<Product> get items => List.unmodifiable(_items);
 
-  // Sepetteki toplam adet (rozet icin).
+  // Sepetteki toplam adet (rozet için).
   int get count => _items.length;
 
   // Toplam tutar.

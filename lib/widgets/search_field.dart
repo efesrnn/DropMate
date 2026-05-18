@@ -1,5 +1,5 @@
-// Arama metin alani - TextField sarmalayicisi.
-// Disaridan controller ve onChanged alir, durum tasimaz (Stateless).
+// Arama metin alanı - TextField sarmalayıcısı.
+// Dışarıdan controller ve onChanged alır, durum tutmaz (Stateless).
 
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
@@ -13,7 +13,7 @@ class SearchField extends StatelessWidget {
     super.key,
     required this.controller,
     required this.onChanged,
-    this.hintText = 'Urun ara...',
+    this.hintText = 'Ürün ara...',
   });
 
   @override

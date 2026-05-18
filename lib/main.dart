@@ -1,5 +1,5 @@
-// DropMate - Mini Katalog uygulamasinin giris noktasi.
-// Hem named route hem MaterialPageRoute kullanimi yonergeyi karsilar.
+// DropMate - Mini Katalog uygulamasının giriş noktası.
+// Hem named route hem MaterialPageRoute kullanımı yönergeyi karşılar.
 
 import 'package:flutter/material.dart';
 import 'models/product.dart';
@@ -22,7 +22,7 @@ class DropMateApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       home: const WelcomeScreen(),
-      // Named route + route arguments (yonerge gerekliligi).
+      // Named route + route arguments (yönerge gerekliliği).
       routes: {
         ProductDetailScreen.routeName: (context) {
           final args = ModalRoute.of(context)!.settings.arguments;
