@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'models/product.dart';
+import 'screens/cart_screen.dart';
 import 'screens/product_detail_screen.dart';
 import 'screens/welcome_screen.dart';
 import 'theme/app_theme.dart';
@@ -21,7 +22,7 @@ class DropMateApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       home: const WelcomeScreen(),
-      // Named route + route arguments
+      // Named route + route arguments (yonerge gerekliligi).
       routes: {
         ProductDetailScreen.routeName: (context) {
           final args = ModalRoute.of(context)!.settings.arguments;
@@ -29,6 +30,7 @@ class DropMateApp extends StatelessWidget {
             product: args is Product ? args : null,
           );
         },
+        CartScreen.routeName: (context) => const CartScreen(),
       },
     );
   }

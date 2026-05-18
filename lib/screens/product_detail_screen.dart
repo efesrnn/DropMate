@@ -1,8 +1,9 @@
 // Urun detay ekrani.
 // Product nesnesini Route Arguments uzerinden alir.
-// Statefull cunku secili teslimat secenegi tutulur.
+// Sepete Ekle butonu CartController state'ini gunceller (durum simulasyonu).
 
 import 'package:flutter/material.dart';
+import '../models/cart_controller.dart';
 import '../models/product.dart';
 import '../theme/app_colors.dart';
 import '../widgets/delivery_option_card.dart';
@@ -10,7 +11,6 @@ import '../widgets/delivery_option_card.dart';
 class ProductDetailScreen extends StatefulWidget {
   static const String routeName = '/product-detail';
 
-  // Direkt push edildiginde de calissin diye constructor parametresi de var.
   final Product? product;
 
   const ProductDetailScreen({super.key, this.product});
@@ -24,9 +24,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Route Arguments yoluyla gelen Product nesnesini al.
+    // Route Arguments yoluyla gelen Product nesnesi.
     final Product product = widget.product ??
         ModalRoute.of(context)!.settings.arguments as Product;
+    final selectedOption = kDeliveryOptions[_selectedDeliveryIndex];
 
     return Scaffold(
       appBar: AppBar(
@@ -41,7 +42,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Urun gorseli
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: AspectRatio(
@@ -60,8 +60,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ),
             const SizedBox(height: 20),
-
-            // Kategori rozeti
             Container(
               padding:
                   const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -79,15 +77,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ),
             const SizedBox(height: 12),
-
-            // Baslik
             Text(
               product.name,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 8),
-
-            // Fiyat
             Text(
               product.formattedPrice,
               style: const TextStyle(
@@ -97,8 +91,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ),
             const SizedBox(height: 20),
-
-            // Aciklama
             Text(
               'Aciklama',
               style: Theme.of(context).textTheme.titleLarge,
@@ -111,8 +103,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
             ),
             const SizedBox(height: 24),
-
-            // Teslimat secenekleri
             Text(
               'Teslimat Secenegi',
               style: Theme.of(context).textTheme.titleLarge,
@@ -136,26 +126,81 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 );
               }),
             ),
+            const SizedBox(height: 16),
+            // Tahmini teslimat - secime gore guncellenir.
+            Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppColors.border),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.schedule, color: AppColors.primary),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          const TextSpan(
+                            text: 'Tahmini teslimat: ',
+                            style: TextStyle(
+                              color: AppColors.textSecondary,
+                              fontSize: 13,
+                            ),
+                          ),
+                          TextSpan(
+                            text: selectedOption.duration,
+                            style: const TextStyle(
+                              color: AppColors.textPrimary,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Text(
+                    '₺${selectedOption.minCommission}-${selectedOption.maxCommission}',
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.accent,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
-      // Alt sabit buton (Sepete Ekle - sonraki commit'te bagli olacak)
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
           child: SizedBox(
             width: double.infinity,
             child: ElevatedButton.icon(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Sepete eklendi')),
-                );
-              },
+              onPressed: () => _addToCart(context, product),
               icon: const Icon(Icons.add_shopping_cart),
               label: const Text('Sepete Ekle'),
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void _addToCart(BuildContext context, Product product) {
+    // CartController durumu guncelle - state simulasyonu.
+    CartController.instance.add(product);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('${product.name} sepete eklendi'),
+        backgroundColor: AppColors.success,
+        duration: const Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
       ),
     );
   }

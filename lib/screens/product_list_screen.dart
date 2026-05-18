@@ -1,13 +1,15 @@
 // Ana ekran: arama + kategori filtresi + urun gridi.
-// Karta dokununca named route + Route Arguments ile detay ekranina gider.
+// AppBar sepet ikonu rozet ile (CartController) bagli.
 
 import 'package:flutter/material.dart';
 import '../data/products.dart';
 import '../models/product.dart';
 import '../theme/app_colors.dart';
 import '../widgets/category_chip_row.dart';
+import '../widgets/cart_icon_button.dart';
 import '../widgets/product_card.dart';
 import '../widgets/search_field.dart';
+import 'cart_screen.dart';
 import 'product_detail_screen.dart';
 
 class ProductListScreen extends StatefulWidget {
@@ -48,10 +50,17 @@ class _ProductListScreenState extends State<ProductListScreen> {
   }
 
   void _openDetail(Product p) {
-    // Named route + Route Arguments yonergeyi karsilar.
+    // Named route + Route Arguments
     Navigator.of(context).pushNamed(
       ProductDetailScreen.routeName,
       arguments: p,
+    );
+  }
+
+  void _openCart() {
+    // MaterialPageRoute ile push - yonergeye uygun ikinci kullanim.
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (_) => const CartScreen()),
     );
   }
 
@@ -62,11 +71,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
       appBar: AppBar(
         title: const Text('DropMate'),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.shopping_cart_outlined),
-            tooltip: 'Sepet',
-          ),
+          CartIconButton(onPressed: _openCart),
           const SizedBox(width: 8),
         ],
       ),
