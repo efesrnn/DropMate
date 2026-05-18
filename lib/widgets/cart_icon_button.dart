@@ -1,5 +1,5 @@
-// AppBar icin sepet ikonu + rozet.
-// CartController'i AnimatedBuilder ile dinler.
+// AppBar için sepet ikonu + rozet.
+// CartController'ı AnimatedBuilder ile dinler.
 
 import 'package:flutter/material.dart';
 import '../models/cart_controller.dart';

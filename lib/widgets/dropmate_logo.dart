@@ -1,6 +1,6 @@
 // DropMate logo widget'i.
-// Daire icinde asagi dogru bir damla/pin sembolu + wordmark.
-// BRAND_IDENTITY 5. bolumdeki tarife uygun olarak Flutter ile cizilmistir.
+// Daire içinde aşağı doğru bir damla/pin sembolü + wordmark.
+// BRAND_IDENTITY 5. bölümdeki tarife uygun olarak Flutter ile çizilmiştir.
 
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
@@ -20,7 +20,7 @@ class DropMateLogo extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Sembol - yesil daire icinde beyaz damla
+        // Sembol - yeşil daire içinde beyaz damla
         Container(
           width: size,
           height: size,

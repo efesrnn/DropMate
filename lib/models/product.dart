@@ -1,6 +1,6 @@
 // Product modeli.
-// JSON serilestirme (fromJson/toJson) destekler, hem seed verisi okumak
-// hem de ilerideki REST entegrasyonlari icin temel olusturur.
+// JSON serileştirme (fromJson/toJson) destekler, hem seed verisi okumak
+// hem de ilerideki REST entegrasyonları için temel oluşturur.
 
 class Product {
   final int id;
@@ -19,8 +19,8 @@ class Product {
     required this.imageUrl,
   });
 
-  // JSON'dan Product nesnesi olusturur.
-  // Eksik veya yanlis tipli alanlar icin guvenli varsayilanlar kullanir.
+  // JSON'dan Product nesnesi oluşturur.
+  // Eksik veya yanlış tipli alanlar için güvenli varsayılanlar kullanır.
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       id: (json['id'] as num?)?.toInt() ?? 0,
@@ -32,7 +32,7 @@ class Product {
     );
   }
 
-  // Product nesnesini JSON'a cevirir (cart kalici hale getirme vb. icin).
+  // Product nesnesini JSON'a çevirir (cart kalıcı hale getirme vb. için).
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -44,7 +44,7 @@ class Product {
     };
   }
 
-  // Fiyatin "₺49,90" formatinda string gosterimini dondurur.
+  // Fiyatın "₺49,90" formatında string gösterimini döndürür.
   String get formattedPrice {
     final whole = price.truncate();
     final fraction = ((price - whole) * 100).round().toString().padLeft(2, '0');

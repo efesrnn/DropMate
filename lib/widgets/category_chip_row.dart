@@ -1,6 +1,6 @@
 // Yatay kayan kategori chip listesi.
-// Secili kategori callback ile parent'a bildirilir.
-// ListView.builder kullanarak yonergeyi karsilar.
+// Seçili kategori callback ile parent'a bildirilir.
+// ListView.builder kullanarak yönergeyi karşılar.
 
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
