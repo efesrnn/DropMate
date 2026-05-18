@@ -2,6 +2,7 @@
 // Bu dosya MaterialApp'i baslatir, tema ve route tanimlarini yukler.
 
 import 'package:flutter/material.dart';
+import 'screens/welcome_screen.dart';
 import 'theme/app_theme.dart';
 
 void main() {
@@ -17,9 +18,7 @@ class DropMateApp extends StatelessWidget {
       title: 'DropMate',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
-      home: const Scaffold(
-        body: Center(child: Text('DropMate')),
-      ),
+      home: const WelcomeScreen(),
     );
   }
 }
